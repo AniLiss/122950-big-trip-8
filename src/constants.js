@@ -3,14 +3,6 @@ export const filtersContainer = document.querySelector(`.trip-filter`);
 export const eventsContainer = document.querySelector(`.trip-points`);
 import {eventData, tripTitle, generateRandomNumber} from './data';
 
-export const createEvent = (amountOfEvents, container) => {
-  return Array(amountOfEvents).fill().map(() => {
-    // container.innerHTML += eventNode;
-    container.innerHTML += makeEvent(eventData());
-    return container;
-  });
-};
-
 export const makeEvent = (event) => `<section class="trip-day">
       <article class="trip-day__info">
         <span class="trip-day__caption">Day</span>
@@ -27,9 +19,7 @@ export const makeEvent = (event) => `<section class="trip-day">
           </p>
           <p class="trip-point__price">&euro;&nbsp;${generateRandomNumber(0, 100)}</p>
           <ul class="trip-point__offers">
-            <li>
-              <button class="trip-point__offer">Upgrade to business +&euro;&nbsp;${generateRandomNumber(0, 100)}</button>
-            </li>
+           ${event.offers}
           </ul>
         </article>
         <article class="trip-point">
@@ -40,12 +30,7 @@ export const makeEvent = (event) => `<section class="trip-day">
           </p>
           <p class="trip-point__price">&euro;&nbsp;${generateRandomNumber(0, 100)}</p>
           <ul class="trip-point__offers">
-            <li>
-              <button class="trip-point__offer">Upgrade to business +&euro;&nbsp;${generateRandomNumber(0, 100)}</button>
-            </li>
-            <li>
-              <button class="trip-point__offer">Select meal +&euro;&nbsp;${generateRandomNumber(0, 100)}</button>
-            </li>
+            ${event.offers}
           </ul>
         </article>
         <article class="trip-point">
@@ -56,9 +41,7 @@ export const makeEvent = (event) => `<section class="trip-day">
           </p>
           <p class="trip-point__price">&euro;&nbsp;${generateRandomNumber(0, 100)}</p>
           <ul class="trip-point__offers">
-            <li>
-              <button class="trip-point__offer">Rent a car +&euro;&nbsp;${generateRandomNumber(0, 100)}</button>
-            </li>
+            ${event.offers}
           </ul>
         </article>
         <article class="trip-point">
@@ -69,11 +52,19 @@ export const makeEvent = (event) => `<section class="trip-day">
           </p>
           <p class="trip-point__price">&euro;&nbsp;${generateRandomNumber(0, 100)}</p>
           <ul class="trip-point__offers">
-            <li>
-              <button class="trip-point__offer">Add breakfast +&euro;&nbsp;${generateRandomNumber(0, 100)}</button>
-            </li>
+           ${event.offers}
           </ul>
         </article>
       </div>
     </section>`;
+
+export const createArrayOfEvents = (amountOfElements) => {
+  return Array(amountOfElements).fill(makeEvent(eventData())).join(``);
+};
+
+export const createEvent = (amountOfEvents, container) => {
+  const arrayOfEvents = createArrayOfEvents(amountOfEvents);
+  container.innerHTML += arrayOfEvents;
+  return container;
+};
 

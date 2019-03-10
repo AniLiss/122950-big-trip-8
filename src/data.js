@@ -12,10 +12,7 @@ const descriptions = [
 ].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 1);
 
 const composeDescriptions = (items) => items.map((item) => (
-  `<li>
-    <button class="trip-point__offer">${item}</button>
-  </li>`
-)
+  `<li><button class="trip-point__offer">${item}</button></li>`)
 );
 
 export const generateRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -64,6 +61,19 @@ export const tripTitle = (obj) => {
           <h3 class="trip-point__title">${key}</h3>`;
 };
 
+const offers = [
+  `Add luggage`,
+  `Switch to comfort class`,
+  `Add meal`,
+  `Choose seats`
+].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 2) + 1);
+
+const composeOffers = (items) => (
+  items.map((item) => (
+    `<li><button class="trip-point__offer">${item} +&euro;&nbsp;${generateRandomNumber(0, 100)}</button></li>`
+  )).join(``)
+);
+
 export const eventData = () => ({
   type: {
     'Taxi': `🚕`,
@@ -85,12 +95,7 @@ export const eventData = () => ({
     `Hong Kong`
   ]),
   pictures: `http://picsum.photos/300/150?r=${Math.random()}`,
-  offers: [
-    `Add luggage`,
-    `Switch to comfort class`,
-    `Add meal`,
-    `Choose seats`
-  ].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3)),
+  offers: composeOffers(offers),
   description: composeDescriptions(descriptions),
   // price: generateRandomNumber(0, 100),
   date: generateRandomDate(new Date(2018, 1, 1), new Date()),

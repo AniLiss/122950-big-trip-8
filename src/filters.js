@@ -1,4 +1,4 @@
-import {filtersContainer, eventsContainer, event, createEvent} from './constants';
+import {filtersContainer, eventsContainer, createEvent} from './constants';
 
 const createFilter = (id, value, isChecked = false) => {
   return `
@@ -30,7 +30,7 @@ const getRandomNumber = (min, max) => {
 
 const switchEvents = () => {
   eventsContainer.innerHTML = ``;
-  createEvent(getRandomNumber(3, 10), event, eventsContainer);
+  createEvent(getRandomNumber(3, 10), eventsContainer);
 };
 
 filtersContainer.addEventListener(`click`, (e) => {
